@@ -1,0 +1,9 @@
+{
+  "name": "render-pinger",
+  "version": "1.0.0",
+  "description": "Standalone pinger to keep Render services alive",
+  "main": "api/ping.js",
+  "engines": {
+    "node": "18.x"
+  }
+}
