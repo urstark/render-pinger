@@ -4,6 +4,6 @@
   "description": "Standalone pinger to keep Render services alive",
   "main": "api/ping.js",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
