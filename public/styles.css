@@ -1,13 +1,13 @@
 :root {
-  --bg-dark: #0f172a;
-  --bg-panel: rgba(30, 41, 59, 0.7);
+  --bg-dark: #1b362c;
+  --bg-panel: rgba(16, 37, 22, 0.7);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --primary: #ffffff;
-  --primary-hover: #2563eb;
+  --primary: #3d3d3d;
+  --primary-hover: #5f5c5c;
   --danger: #ef4444;
   --success: #10b981;
-  --border: rgba(255, 255, 255, 0.1);
+  --border: none;
   --glass-blur: 12px;
 }
 

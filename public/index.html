@@ -58,8 +58,9 @@
         </div>
 
         <div class="glass-panel form-container">
-          <h3>Add New Endpoint</h3>
+          <h3 id="form-title">Add New Endpoint</h3>
           <form id="add-endpoint-form">
+            <input type="hidden" id="edit-id">
             <div class="form-group">
               <label>Target URL</label>
               <input type="url" id="new-url" placeholder="https://..." required>
@@ -68,7 +69,10 @@
               <label>Authorization (Bearer Token) - Optional</label>
               <input type="text" id="new-auth" placeholder="Bearer xyz123...">
             </div>
-            <button type="submit">Add Endpoint</button>
+            <div style="display: flex; gap: 8px;">
+              <button type="submit" id="btn-submit-form">Add Endpoint</button>
+              <button type="button" id="btn-cancel-edit" class="secondary hidden">Cancel</button>
+            </div>
           </form>
         </div>
       </section>

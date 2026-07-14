@@ -13,6 +13,11 @@ const endpointsList = document.getElementById('endpoints-list');
 const addEndpointForm = document.getElementById('add-endpoint-form');
 const btnTriggerPing = document.getElementById('btn-trigger-ping');
 
+const editId = document.getElementById('edit-id');
+const formTitle = document.getElementById('form-title');
+const btnSubmitForm = document.getElementById('btn-submit-form');
+const btnCancelEdit = document.getElementById('btn-cancel-edit');
+
 const logsList = document.getElementById('logs-list');
 const btnRefreshLogs = document.getElementById('btn-refresh-logs');
 
@@ -93,7 +98,10 @@ async function loadEndpoints() {
       <td>${ep.headers?.Authorization ? '🔑 Bearer set' : 'None'}</td>
       <td>${new Date(ep.createdAt).toLocaleString()}</td>
       <td>
-        <button class="secondary" onclick="deleteEndpoint('${ep._id}')">Delete</button>
+        <div style="display: flex; gap: 8px;">
+          <button class="secondary" onclick="editEndpoint('${ep._id}', '${ep.url}', '${ep.headers?.Authorization || ''}')">Edit</button>
+          <button class="secondary" onclick="deleteEndpoint('${ep._id}')">Delete</button>
+        </div>
       </td>
     </tr>
   `).join('');
@@ -103,24 +111,58 @@ addEndpointForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const url = document.getElementById('new-url').value;
   const auth = document.getElementById('new-auth').value;
+  const id = editId.value;
 
   const headers = {};
   if (auth) headers.Authorization = auth;
 
-  const res = await fetch('/api/endpoints', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ url, headers })
-  });
+  let res;
+  if (id) {
+    res = await fetch('/api/endpoints', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, url, headers })
+    });
+  } else {
+    res = await fetch('/api/endpoints', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url, headers })
+    });
+  }
 
   if (res.ok) {
-    document.getElementById('new-url').value = '';
-    document.getElementById('new-auth').value = '';
+    cancelEdit();
     loadEndpoints();
   } else {
-    alert('Failed to add endpoint');
+    alert(id ? 'Failed to update endpoint' : 'Failed to add endpoint');
   }
 });
+
+window.editEndpoint = (id, url, auth) => {
+  editId.value = id;
+  document.getElementById('new-url').value = url;
+  document.getElementById('new-auth').value = auth;
+  
+  formTitle.textContent = 'Edit Endpoint';
+  btnSubmitForm.textContent = 'Update Endpoint';
+  btnCancelEdit.classList.remove('hidden');
+  
+  // Scroll to form
+  addEndpointForm.scrollIntoView({ behavior: 'smooth' });
+};
+
+window.cancelEdit = () => {
+  editId.value = '';
+  document.getElementById('new-url').value = '';
+  document.getElementById('new-auth').value = '';
+  
+  formTitle.textContent = 'Add New Endpoint';
+  btnSubmitForm.textContent = 'Add Endpoint';
+  btnCancelEdit.classList.add('hidden');
+};
+
+btnCancelEdit.addEventListener('click', cancelEdit);
 
 window.deleteEndpoint = async (id) => {
   if (!confirm('Are you sure you want to delete this endpoint?')) return;

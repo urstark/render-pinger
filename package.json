@@ -11,5 +11,9 @@
     "cookie": "^0.6.0",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.5.0"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
   }
 }
