@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import * as cookie from 'cookie';
+import cookie from 'cookie';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'render-pinger-super-secret';
 

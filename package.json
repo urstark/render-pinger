@@ -8,7 +8,7 @@
     "node": "20.x"
   },
   "dependencies": {
-    "cookie": "^2.0.1",
+    "cookie": "^0.6.0",
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.5.0"
   }
