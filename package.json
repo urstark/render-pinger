@@ -5,5 +5,10 @@
   "main": "api/ping.js",
   "engines": {
     "node": "24.x"
+  },
+  "dependencies": {
+    "cookie": "^2.0.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.5.0"
   }
 }

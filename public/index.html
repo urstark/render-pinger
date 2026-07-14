@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render Pinger Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Authentication Screen -->
+  <div id="auth-screen" class="glass-panel active">
+    <h1>Render Pinger</h1>
+    <p>Sign in to manage your endpoints</p>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Access Dashboard</button>
+      <div id="auth-error" class="error-text"></div>
+    </form>
+  </div>
+
+  <!-- Main Dashboard -->
+  <div id="dashboard-screen" class="hidden">
+    <aside class="sidebar glass-panel">
+      <h2>Pinger</h2>
+      <nav>
+        <button id="nav-endpoints" class="active">Endpoints</button>
+        <button id="nav-logs">Ping Logs</button>
+      </nav>
+      <button id="btn-logout" class="outline">Logout</button>
+    </aside>
+
+    <main class="content">
+      
+      <!-- Endpoints View -->
+      <section id="view-endpoints" class="view active">
+        <header>
+          <h2>Manage Endpoints</h2>
+          <button id="btn-trigger-ping" class="primary pulse">Trigger Ping Now</button>
+        </header>
+
+        <div class="glass-panel table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>URL</th>
+                <th>Headers</th>
+                <th>Added On</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="endpoints-list">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="glass-panel form-container">
+          <h3>Add New Endpoint</h3>
+          <form id="add-endpoint-form">
+            <div class="form-group">
+              <label>Target URL</label>
+              <input type="url" id="new-url" placeholder="https://..." required>
+            </div>
+            <div class="form-group">
+              <label>Authorization (Bearer Token) - Optional</label>
+              <input type="text" id="new-auth" placeholder="Bearer xyz123...">
+            </div>
+            <button type="submit">Add Endpoint</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Logs View -->
+      <section id="view-logs" class="view hidden">
+        <header>
+          <h2>Recent Ping Logs</h2>
+          <button id="btn-refresh-logs" class="secondary">Refresh</button>
+        </header>
+
+        <div class="glass-panel table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>URL</th>
+                <th>Response Time</th>
+                <th>Code / Error</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="logs-list">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
