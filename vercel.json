@@ -4,11 +4,5 @@
       "source": "/api/ping",
       "destination": "/api/ping"
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/ping",
-      "schedule": "*/14 * * * *"
-    }
   ]
 }
