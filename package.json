@@ -5,7 +5,7 @@
   "type": "module",
   "main": "api/ping.js",
   "engines": {
-    "node": "24.x"
+    "node": "20.x"
   },
   "dependencies": {
     "cookie": "^2.0.1",
